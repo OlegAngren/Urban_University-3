@@ -14,9 +14,20 @@ def get_multiplied_digits(number):
         return get_multiplied_digits(int(str_number[1:]))  # пропускаем ноль
 
     # Рекурсивно умножаем первую цифру на результат следующего вызова
-    return first * get_multiplied_digits(int(str_number[1:]))
+    remaining_result = get_multiplied_digits(int(str_number[1:]))
+    if remaining_result == 0:  # Пропускаем умножение на ноль
+        return first
+    return first * remaining_result
 
 
 # Пример использования
 result = get_multiplied_digits(40203)
-print(result)  # Вывод: 24
+print(result)  # Ожидаемый вывод: 24
+
+# Пример с нулями на конце
+result = get_multiplied_digits(40500)
+print(result)  # Ожидаемый вывод: 20
+
+''' Что изменено:
+Добавлена проверка if remaining_result == 0, чтобы избежать умножения на ноль.
+При встрече конечных нулей они игнорируются, так как уже не влияют на результат умножения.'''
